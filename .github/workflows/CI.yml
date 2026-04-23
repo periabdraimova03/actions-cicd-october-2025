@@ -30,4 +30,10 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/flask-app:1.0.0       
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/flask-app:1.0.0  
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/flask-app:1.0.0
+          format: 'table'         
